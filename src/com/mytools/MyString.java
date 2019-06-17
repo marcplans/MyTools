@@ -1,19 +1,24 @@
 package com.mytools;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.IconifyAction;
 
 public class MyString {
 
 	// Returns a given string repeated a number of times.
 	public static String repeatString(String toRepeat,
-		int repetitions) {
+			int repetitions) {
 		String output = "";
 		for (int i = 0; i < repetitions; i++) {
 			output += toRepeat;
 		}
 		return output;
 	}
-	
+
 	// Returns a given number as a string with trailing spaces
 	// so that matches a desired string length
 	public static String formatNum(Double numToFormat,
@@ -41,41 +46,41 @@ public class MyString {
 	// Returns a given a string with leading spaces
 	// so that matches a desired string length.
 	public static String leadingString(String inputString,
-		int desiredLength) {
+			int desiredLength) {
 		int currentLength = inputString.length();
 		if (desiredLength <= currentLength) {
 			return inputString;
 		}
 		return repeatString(" ", desiredLength - currentLength)
-			+ inputString;
+				+ inputString;
 	}
 
 	// Returns a given string with trailing spaces
 	// so that matches a desired string length.
 	public static String trailingString(String inputString,
-		int desiredLength) {
+			int desiredLength) {
 		int currentLength = inputString.length();
 		if (desiredLength <= currentLength) {
 			return inputString;
 		}
 		return inputString
-			+ repeatString(" ", desiredLength - currentLength);
+				+ repeatString(" ", desiredLength - currentLength);
 	}
 
 	// Returns line of given strings space separated according
 	// to given spacings array, underlined.
 	public static String tableHeader(List<String> strings,
-		List<Integer> stringSpacing) {
+			List<Integer> stringSpacing) {
 		String outputString = stringLine(strings, stringSpacing);
 		return outputString + "\n"
-			+ repeatString("-", outputString.length());
+				+ repeatString("-", outputString.length());
 	}
 
 	// Returns line of given strings space separated according
 	// to given spacings array. Negative spacing adds leading
 	// spaces and positive ones adds trailing spaces.
 	public static String stringLine(List<String> strings,
-		List<Integer> stringSpacing) {
+			List<Integer> stringSpacing) {
 		String outputString = "";
 		if (strings.size() != stringSpacing.size()) {
 			return outputString;
@@ -83,15 +88,15 @@ public class MyString {
 		for (int i = 0; i < strings.size(); i++) {
 			if (stringSpacing.get(i) < 0) {
 				outputString += leadingString(strings.get(i),
-					Math.abs(stringSpacing.get(i)));
+						Math.abs(stringSpacing.get(i)));
 			} else {
 				outputString += trailingString(strings.get(i),
-					stringSpacing.get(i));
+						stringSpacing.get(i));
 			}
 		}
 		return outputString;
 	}
-	
+
 	// Returns two given strings concatenated with a number of
 	// spaces between them to match a final string desired length.
 	public static String sandwichString(String firstString,
@@ -120,8 +125,7 @@ public class MyString {
 		}
 		return lastWord;
 	}
-	
-	
+
 	// Returns given string without trailing spaces
 	public static String trimTrailingSpaces(String stringToTrim) {
 		int stringPos = stringToTrim.length() - 1;
@@ -131,7 +135,7 @@ public class MyString {
 		}
 		return stringToTrim.substring(0, stringPos + 1);
 	}
-	
+
 	// Returns given string reversed
 	public static String reverseString(String toReverseString) {
 		String outputString = "";
@@ -140,11 +144,24 @@ public class MyString {
 		}
 		return outputString;
 	}
+
+	// Checks if string is null or empty or contains only whitespace
+	public static boolean isVoidString(String stringToCheck) {
+		return (stringToCheck == null
+				|| stringToCheck.trim().isEmpty());
+	}
 	
+	// Checks if any given string is null or empty 
+	// or contains only whitespace
+	public static boolean isAnyStringVoid(String... stringsToCheck) {
+		for (String currentString : stringsToCheck) {
+			if (currentString == null
+					|| currentString.trim().isEmpty()) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
-	
-	
-	
-	
-	
+
 }
